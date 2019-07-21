@@ -38,12 +38,12 @@ public class Springboot01CacheApplicationTests {
 	@Test
 	public void test01(){
 		//给redis中保存数据
-	    //stringRedisTemplate.opsForValue().append("msg","hello");
-//		String msg = stringRedisTemplate.opsForValue().get("msg");
-//		System.out.println(msg);
+	    stringRedisTemplate.opsForValue().append("msg","hello");
+		String msg = stringRedisTemplate.opsForValue().get("msg");
+		System.out.println(msg);
 
-//		stringRedisTemplate.opsForList().leftPush("mylist","1");
-//		stringRedisTemplate.opsForList().leftPush("mylist","2");
+		stringRedisTemplate.opsForList().leftPush("mylist","1");
+		stringRedisTemplate.opsForList().leftPush("mylist","2");
 	}
 
 	//测试保存对象

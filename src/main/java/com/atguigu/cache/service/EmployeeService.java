@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
-@CacheConfig(cacheNames="emp"/*,cacheManager = "employeeCacheManager"*/) //抽取缓存的公共配置
+//@CacheConfig(cacheNames="emp"/*,cacheManager = "employeeCacheManager"*/) //抽取缓存的公共配置
 @Service
 public class EmployeeService {
 
@@ -20,7 +20,7 @@ public class EmployeeService {
 
      *
      * 原理：
-     *   1、自动配置类；CacheAutoConfiguration
+     *   1、自动配置类；CacheAutoConfiguration 。里面有这个方法
      *   2、缓存的配置类
      *   org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration
      *   org.springframework.boot.autoconfigure.cache.JCacheCacheConfiguration
@@ -39,7 +39,7 @@ public class EmployeeService {
      *   5、可以获取和创建ConcurrentMapCache类型的缓存组件；他的作用将数据保存在ConcurrentMap中；
      *
      *   运行流程：
-     *   @Cacheable：
+     *   以@Cacheable为例子讲解：
      *   1、方法运行之前，先去查询Cache（缓存组件），按照cacheNames指定的名字获取；
      *      （CacheManager先获取相应的缓存），第一次获取缓存如果没有Cache组件会自动创建。
      *   2、去Cache中查找缓存的内容，使用一个key，默认就是方法的参数；
@@ -84,6 +84,7 @@ public class EmployeeService {
      * @return
      *
      */
+//    @Cacheable(value = {"emp"}/*,keyGenerator = "myKeyGenerator",condition = "#a0>1",unless = "#a0==2"*/)
     @Cacheable(value = {"emp"}/*,keyGenerator = "myKeyGenerator",condition = "#a0>1",unless = "#a0==2"*/)
     public Employee getEmp(Integer id){
         System.out.println("查询"+id+"号员工");

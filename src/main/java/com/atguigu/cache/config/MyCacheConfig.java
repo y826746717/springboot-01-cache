@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+/**
+ * 自定义生成key
+ *
+ */
 @Configuration
 public class MyCacheConfig {
 

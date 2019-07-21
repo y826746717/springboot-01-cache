@@ -40,7 +40,7 @@ public class MyRedisConfig {
 
 
     //CacheManagerCustomizers可以来定制缓存的一些规则
-    @Primary  //将某个缓存管理器作为默认的
+//    @Primary  //将某个缓存管理器作为默认的
     @Bean
     public RedisCacheManager employeeCacheManager(RedisTemplate<Object, Employee> empRedisTemplate){
         RedisCacheManager cacheManager = new RedisCacheManager(empRedisTemplate);
@@ -55,6 +55,19 @@ public class MyRedisConfig {
     @Bean
     public RedisCacheManager deptCacheManager(RedisTemplate<Object, Department> deptRedisTemplate){
         RedisCacheManager cacheManager = new RedisCacheManager(deptRedisTemplate);
+        //key多了一个前缀
+
+        //使用前缀，默认会将CacheName作为key的前缀
+        cacheManager.setUsePrefix(true);
+
+        return cacheManager;
+    }
+
+    //开发中肯定不会那么傻逼，一个一个CacheManager配置，肯定必须要使用这种方式RedisTemplate<Object, Object> objRedisTemplate
+    @Primary  //将某个缓存管理器作为默认的
+    @Bean
+    public RedisCacheManager defaultCacheManager(RedisTemplate<Object, Object> objRedisTemplate){
+        RedisCacheManager cacheManager = new RedisCacheManager(objRedisTemplate);
         //key多了一个前缀
 
         //使用前缀，默认会将CacheName作为key的前缀
